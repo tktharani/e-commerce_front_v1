@@ -1,38 +1,200 @@
-.App {
+.hero-section {
+  background-image: url('../public/images/hero-banner.png');
+  background-size: cover;
+  background-position: center;
+  color: rgb(56, 8, 228);
+  padding: 100px 0;
+}
+
+.hero-content {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  color:blue
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #0056b3;
+}
+
+
+#footer
+.footer {
+  background-color: #ffffcc; /* Light yellow */
+  color: #666; /* Grey text */
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-top {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+  flex: 1;
+}
+
+.footer-left h3,
+.footer-center h3,
+.footer-right h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #666;
+}
+
+.social-icons {
+  display: flex;
   align-items: center;
+  margin-top: 20px;
+}
+
+.social-icons li {
+  margin-right: 15px;
+}
+
+.social-icons a {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  text-align: center;
+}
+
+
+#Loginpage
+.container {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.login-form {
+  width: 300px;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-success {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-white {
+  color: #fff;
+}
+
+#signupform
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.bg-secondary {
+  background-color: #6c757d; /* Gray background */
+}
+
+.signup-form {
+  max-width: 400px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-success {
+  padding: 10px 20px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.text-white {
+  color: #fff;
 }

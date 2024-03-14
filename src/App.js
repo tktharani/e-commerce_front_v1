@@ -14,10 +14,13 @@ import SignUpPage from './Components/SignUpPage.jsx';
 import EditProductForm from './Components/EditProductForm.jsx';
 import NotFoundPage from './Components/NotFoundPage.jsx';
 import Vegetables from './Components/Vegetables.jsx';
+import HeroSection from './Components/HeroSection.jsx'
+import Footer from './Components/Footer.jsx'
 
 function App() {
   return (
     <div className="App">
+
       
        <BrowserRouter>
        <Routes>
@@ -29,7 +32,7 @@ function App() {
            <Route path="/login" element={<Login1 />}></Route>
            <Route path="*" component={NotFoundPage} />
            <Route path="/edit/:id" element={<EditProductForm />} />  
-           <Route path="/vegetables/:category" element={<Vegetables />} />  
+           <Route path="/vegetables" element={<Vegetables />} />  
            
            
         </Routes>

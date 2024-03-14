@@ -46,29 +46,34 @@ const SignUpPage = () => {
            }
        }
 
-  return (
-    <div>
-      <div className="container bg-secondary p-5">
-       <h2 className='text-uppercase text-danger'>Register form</h2>
-         <form onSubmit={handleSubmit}>
-            <label className='text-white p-2'>User_Name:</label>
-            <input type="text" name="username" value={formData.username} onChange={handleChange}></input><br></br>
-            <label  className='text-white p-2'>Password</label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange}></input><br></br>
-            <label className='text-white p-2'>Email</label>
-            <input type="text" name="email" value={formData.email} onChange={handleChange}></input><br></br>
-             
-            <label className='text-white p-2'>Address</label>
-            <input type="text" name="address" value={formData.address} onChange={handleChange}></input><br></br>
-
-            <button  className="btn btn-success m-2">Register</button>
-            <Link to="/login" className="">Back to Login</Link>
- 
-
-        </form>
-      </div>
-    </div>
-  )
-}
-
-export default SignUpPage;
+       return (
+        <div>
+          <div className="container bg-secondary p-5">
+            <h2 className='text-uppercase text-danger mb-4'>Register form</h2>
+            <form onSubmit={handleSubmit} className="signup-form">
+              <div className="form-group">
+                <label htmlFor="username" className="text-white p-2">Username</label>
+                <input type="text" name="username" id="username" className="form-control" value={formData.username} onChange={handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password" className="text-white p-2">Password</label>
+                <input type="password" name="password" id="password" className="form-control" value={formData.password} onChange={handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email" className="text-white p-2">Email</label>
+                <input type="email" name="email" id="email" className="form-control" value={formData.email} onChange={handleChange} />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address" className="text-white p-2">Address</label>
+                <input type="text" name="address" id="address" className="form-control" value={formData.address} onChange={handleChange} />
+              </div>
+              <button type="submit" className="btn btn-success mr-2">Register</button>
+              <Link to="/login" className="text-white">Back to Login</Link>
+            </form>
+          </div>
+        </div>
+      );
+    }
+    
+    export default SignUpPage;
+    

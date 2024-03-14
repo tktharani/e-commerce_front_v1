@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
 import { Link } from "react-router-dom";
+import HeroSection from './HeroSection';
+import Footer from './Footer';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+
 
 
 
@@ -32,12 +36,13 @@ const ProductList = () => {
   return (
     <div>
       <NavBar />
+      <HeroSection />
       
           
     <div className="container mt-4">
-     <p>
+       <p class="d-flex justify-content-end">
           Category Name:
-          
+
           <select id="category" value={selectedCategory} onChange={handleSelectChange}>
                 <option value="">Select category...</option>
                 <option>fruits</option>
@@ -51,7 +56,7 @@ const ProductList = () => {
                 ))}
             </select>
         </p>
-      <h1 className="mb-4">Product List</h1>
+      <h1 className="mb-4">All Product</h1>
       <div className="row">
         {products.map(product => (
           <div key={product.id} className="col-lg-4 col-md-6 mb-4">
@@ -68,6 +73,7 @@ const ProductList = () => {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
     </div>
   );

@@ -30,11 +30,16 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div className='text-success'>
       <h1>Admin Page</h1>
-      <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
-      <Link className="btn btn-primary " to="/addproducts">Add Product</Link>
+      <Link to="/login" className='d-flex justify-content-end m-3' style={{textDecoration: 'none'}}><button>Logout</button></Link>
+
+      <div className='d-grid gap-2 d-md-flex justify-content-md-start'>
+        
+          <Link className="btn btn-primary m-2 " to="/addproducts">Add Product</Link>
+      
       </div>
+      
 
       <table className="table table-hover table-bordered border-success ">
         <thead>
@@ -68,6 +73,7 @@ const Admin = () => {
         </tbody>
       </table>
     </div>
+    
   );
 };
 

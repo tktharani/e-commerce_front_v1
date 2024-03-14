@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
-import Navbar from './NavBar';
+
 
 
 const Login1 = () => {
@@ -37,6 +37,7 @@ const navigate=useNavigate();
                  }
                  setFormData(res.data)
              }
+             console.log(setFormData)
         })
         
         .catch((error) =>{
@@ -45,34 +46,28 @@ const navigate=useNavigate();
 
      }
 
-  return (
-    <div>
-        <Navbar />
-        <div className="container  p-5">
-        <form onSubmit={handleSubmit}>
-        <label className="color:white p-3">UserName</label>
-            <input type="text" name="username" value={formData.username} onChange={handleChange}></input><br></br>
-             
-            <label className="p-4">Password</label>
-            <input type="password" name="password" value={formData.password} onChange={handleChange}></input><br></br>
-
-            <button  className="btn btn-success mx-4 px-3">Login</button>
-
-            <Link to="/signup">Create New Account</Link>
-        </form>   
-        <div className="container">
-           {Array.isArray(formData)&& formData.map((formData)=>(
-            <div className="card" key={formData.id}>
-                <h1>Welcome{formData.username}</h1>
-                </div>
-            ))}
-            
-    </div>
-    </div>
-        
-        
-        </div>
-  )
-}
-
-export default Login1
+     return (
+      <div className="container p-5">
+        <h2>Login Form</h2>
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="form-group">
+            <label htmlFor="username" className="text-white">Username</label>
+            <input type="text" name="username" id="username" className="form-control" value={formData.username} onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="text-white">Password</label>
+            <input type="password" name="password" id="password" className="form-control" value={formData.password} onChange={handleChange} />
+          </div>
+          <button type="submit" className="btn btn-success">Login</button>
+          <Link to="/signup" className="ml-3 text-white">Create New Account</Link>
+        </form>
+        {Array.isArray(formData) && formData.map(formData => (
+          <div className="card" key={formData.id}>
+            <h1>Welcome {formData.username}</h1>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+  export default Login1;

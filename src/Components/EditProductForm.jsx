@@ -120,7 +120,7 @@ export default function EditProductForm() {
         <button type="button" onClick={handleFile}>Upload Image</button><br></br>
   
         
-        <Link className="btn btn-outline-primary" to="/admin">Submit</Link>
+        < button type="submit"className="btn btn-outline-primary" >Submit</button>
         <Link className="btn btn-outline-primary" to="/admin">Cancel</Link>
       </form>
     </div>
