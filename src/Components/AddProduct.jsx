@@ -54,10 +54,10 @@ export const AddProduct = () => {
     // Validate form fields
     if (!formData.name || !formData.description || !formData.price || !selectedCategory || !selectedImage) {
       alert("Please fill in all fields");
-      return; // Exit the function if any required field is missing
+      return; 
     }
   
-    // Proceed with submitting the form if all fields are filled
+    
     try {
       const response = await axios.post('http://localhost:8080/product/add', {
         name: formData.name,
@@ -138,4 +138,5 @@ setSelectedCategory(event.target.value);
     </div>
   )
 }
+
 

@@ -13,8 +13,7 @@ import Login1 from './Components/Login1.jsx';
 import SignUpPage from './Components/SignUpPage.jsx';
 import EditProductForm from './Components/EditProductForm.jsx';
 import NotFoundPage from './Components/NotFoundPage.jsx';
-import DeleteProduct from './Components/DeleteProduct.jsx';
-
+import Vegetables from './Components/Vegetables.jsx';
 
 function App() {
   return (
@@ -29,8 +28,8 @@ function App() {
            <Route path="/admin" element={<Admin />}></Route>
            <Route path="/login" element={<Login1 />}></Route>
            <Route path="*" component={NotFoundPage} />
-           <Route path="/edit/:id" element={<EditProductForm />} />   
-           {/* <Route path="/delete" element={<DeleteProduct />} />               */}
+           <Route path="/edit/:id" element={<EditProductForm />} />  
+           <Route path="/vegetables/:category" element={<Vegetables />} />  
            
            
         </Routes>

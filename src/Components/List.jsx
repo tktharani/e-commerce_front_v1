@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavBar from './NavBar';
+import { Link } from "react-router-dom";
+
+
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   useEffect(() => {
     fetchProducts();
@@ -17,6 +22,12 @@ const ProductList = () => {
       console.error('Error fetching products:', error);
     }
   };
+  const handleSelectChange = (event) => {
+    console.log("Selected Category ====>"+selectedCategory)
+  
+  setSelectedCategory(event.target.value);
+  };
+  
 
   return (
     <div>
@@ -24,7 +35,22 @@ const ProductList = () => {
       
           
     <div className="container mt-4">
-      
+     <p>
+          Category Name:
+          
+          <select id="category" value={selectedCategory} onChange={handleSelectChange}>
+                <option value="">Select category...</option>
+                <option>fruits</option>
+                <option><Link to="/vegetables/vegetables">Vegetables</Link></option>
+                <option>Fresh fish</option>
+                <option>Fresh meat</option>
+                {categories.map(category => (
+                    <option key={category.id} value={category.categoryname}>
+                        {category.categoryname}
+                    </option>
+                ))}
+            </select>
+        </p>
       <h1 className="mb-4">Product List</h1>
       <div className="row">
         {products.map(product => (

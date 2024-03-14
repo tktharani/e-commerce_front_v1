@@ -104,7 +104,7 @@ export default function EditProductForm() {
                 ))}
             </select>
         </p>
-        {image && ( // Check if image URL is available
+        {image && ( 
           <div>
             <img src={image} alt="Product" style={{ width: "250px" }} />
             <br />
@@ -120,9 +120,10 @@ export default function EditProductForm() {
         <button type="button" onClick={handleFile}>Upload Image</button><br></br>
   
         
-        <button type="submit" className="btn btn-outline-primary">Submit</button>
+        <Link className="btn btn-outline-primary" to="/admin">Submit</Link>
         <Link className="btn btn-outline-primary" to="/admin">Cancel</Link>
       </form>
     </div>
   );
 }
+

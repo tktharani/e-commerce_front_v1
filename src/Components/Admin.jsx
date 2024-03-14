@@ -32,17 +32,20 @@ const Admin = () => {
   return (
     <div>
       <h1>Admin Page</h1>
-      <Link className="btn btn-primary" to="/addproducts">Add Product</Link>
+      <div className='d-grid gap-2 d-md-flex justify-content-md-end'>
+      <Link className="btn btn-primary " to="/addproducts">Add Product</Link>
+      </div>
 
-      <table className="table table-striped table-hover">
+      <table className="table table-hover table-bordered border-success ">
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Product Name</th>
+            <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
-            <th scope="col">Category Name</th>
+            <th scope="col">Category_Name</th>
             <th scope="col">Image</th>
+            <th scope="col">Action</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -56,8 +59,9 @@ const Admin = () => {
               <td>{product.categoryname}</td>
               <td>{product.image}</td>
               <td>
-                <Link className='btn btn-success mx-2' to={`/edit/${product.id}`}>Edit</Link>
-                <button className='btn btn-danger mx-2' onClick={() => deleteProduct(product.id)}>Delete</button>
+                <Link className='btn btn-outline-success' to={`/edit/${product.id}`}>Edit</Link></td>
+                <td>
+                <button className='btn btn-outline-danger' onClick={() => deleteProduct(product.id)}>Delete</button>
               </td>
             </tr>
           ))}
