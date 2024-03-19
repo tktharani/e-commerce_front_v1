@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { Nav, Modal, Button } from 'react-bootstrap'; // Import Modal and Button from react-bootstrap
+import AllProduct from './AllProduct.jsx';
+import User from './User.jsx';
+import AddProductForm from './AddProduct';
 
 const Admin = () => {
+  const [activeTab, setActiveTab] = useState('active'); // Default active tab is 'active'
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [showAddModal, setShowAddModal] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -15,65 +22,51 @@ const Admin = () => {
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
+      alert('Failed to fetch products. Please try again later.');
     }
   };
-  
-  const deleteProduct = async (id) => {
-    const confirmed = window.confirm('Are you sure you want to delete this product?');
-    if (!confirmed) return;
-    try {
-      await axios.delete(`http://localhost:8080/product/delete/${id}`);
-      fetchProducts(); 
-       } catch (error) {
-      console.error('Error deleting product:', error);
-    }
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
   };
 
   return (
-    <div className='text-success'>
-      <h1>Admin Page</h1>
-      <Link to="/login" className='d-flex justify-content-end m-3' style={{textDecoration: 'none'}}><button>Logout</button></Link>
-
-      <div className='d-grid gap-2 d-md-flex justify-content-md-start'>
-        
-          <Link className="btn btn-primary m-2 " to="/addproducts">Add Product</Link>
-      
+    <div className='admin-container '>
+      <h1 className='text-success text-center'>Admin Page</h1>
+      <Link to="/login" className="d-flex justify-content-end m-2 btn-info"><button>Logout</button></Link>
+      <div className="d-flex justify-content-end m-2 btn-warning">
+      <button  className=''onClick={() => setShowAddModal(true)}>Add Product</button>
       </div>
+
       
 
-      <table className="table table-hover table-bordered border-success ">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category_Name</th>
-            <th scope="col">Image</th>
-            <th scope="col">Action</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.description}</td>
-              <td>{product.price}</td>
-              <td>{product.categoryname}</td>
-              <td>{product.image}</td>
-              <td>
-                <Link className='btn btn-outline-success' to={`/edit/${product.id}`}>Edit</Link></td>
-                <td>
-                <button className='btn btn-outline-danger' onClick={() => deleteProduct(product.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <Nav className="nav-pills m-2">
+        <Nav.Item>
+          <Nav.Link className={`nav-link ${activeTab === 'active' ? 'active' : ''}`} onClick={() => setActiveTab('active')}>Product</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link className={`nav-link ${activeTab === 'user' ? 'active' : ''}`} onClick={() => setActiveTab('user')}>User</Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      <div className="tab-content">
+        {activeTab === 'active' && <AllProduct />}
+        {activeTab === 'user' && <User />}
+      </div>
+
+      <Modal show={showAddModal} onHide={() => setShowAddModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Product</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <AddProductForm />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowAddModal(false)}>Close</Button>
+          {/* Add functionality to submit the form and update product list */}
+        </Modal.Footer>
+      </Modal>
     </div>
-    
   );
 };
 

@@ -78,52 +78,47 @@ export default function EditProductForm() {
   };
 
   return (
-    <div>
+    <div className="container mt-4">
       <form onSubmit={(e) => onSubmit(e)}>
-              <p>
-          Product Name: <input type='text' placeholder='Enter product name' name='name' value={name} onChange={(e) => onInputChange(e)} />
-        </p>
-        <p>
-          Description: <input type='text' placeholder='Enter description' name='description' value={description} onChange={(e) => onInputChange(e)} />
-        </p>
-        <p>
-          Price: <input type='number' placeholder='Enter price' name='price' value={price} onChange={(e) => onInputChange(e)} />
-        </p>
-        <p>
-          Category Name:
-          <select id="category" value={selectedCategory} onChange={handleSelectChange}>
-                <option value="">Select category...</option>
-                <option>fruits</option>
-                <option>Vegetables</option>
-                <option>Fresh fish</option>
-                <option>Fresh meat</option>
-                {categories.map(category => (
-                    <option key={category.id} value={category.categoryname}>
-                        {category.categoryname}
-                    </option>
-                ))}
-            </select>
-        </p>
-        {image && ( 
-          <div>
-            <img src={image} alt="Product" style={{ width: "250px" }} />
-            <br />
-          </div>
-        )}
-        <input
-          type="file"
-          name="myImage"
-          onChange={(event) => {
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
-        <button type="button" onClick={handleFile}>Upload Image</button><br></br>
-  
-        
-        < button type="submit"className="btn btn-outline-primary" >Submit</button>
-        <Link className="btn btn-outline-primary" to="/admin">Cancel</Link>
+        <div className="mb-3">
+          <label htmlFor="productName" className="form-label">Product Name:</label>
+          <input type="text" id="productName" className="form-control" placeholder="Enter product name" name="name" value={name} onChange={(e) => onInputChange(e)} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">Description:</label>
+          <input type="text" id="description" className="form-control" placeholder="Enter description" name="description" value={description} onChange={(e) => onInputChange(e)} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="price" className="form-label">Price:</label>
+          <input type="number" id="price" className="form-control" placeholder="Enter price" name="price" value={price} onChange={(e) => onInputChange(e)} />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="category" className="form-label">Category Name:</label>
+          <select id="category" className="form-select" value={selectedCategory} onChange={handleSelectChange}>
+            <option value="">Select category...</option>
+            <option>fruits</option>
+            <option>Vegetables</option>
+            <option>Fresh fish</option>
+            <option>Fresh meat</option>
+            {categories.map(category => (
+              <option key={category.id} value={category.categoryname}>{category.categoryname}</option>
+            ))}
+          </select>
+        </div>
+        <div className="mb-3">
+          {image && ( 
+            <div>
+              <img src={image} alt="Product" style={{ width: "250px" }} className="img-thumbnail" />
+            </div>
+          )}
+          <input type="file" name="myImage" onChange={(event) => setSelectedImage(event.target.files[0])} className="form-control" />
+          <button type="button" onClick={handleFile} className="btn btn-outline-primary mt-2">Upload Image</button>
+        </div>
+        <div className="mb-3">
+          <button type="submit" className="btn btn-primary me-2">Submit</button>
+          <Link className="btn btn-secondary" to="/admin">Cancel</Link>
+        </div>
       </form>
     </div>
   );
-}
-
+          }

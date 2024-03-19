@@ -1,0 +1,16 @@
+.search-bar {
+    margin-bottom: 20px; /* Add margin below the search bar */
+  }
+  
+  .search-input {
+    width: 200px; /* Set the width of the search input */
+    padding: 5px; /* Add padding to the input */
+    border-radius: 5px; /* Add rounded corners */
+    border: 1px solid green; /* Add border */
+  }
+  
+  .search-input:focus {
+    outline: none; /* Remove outline on focus */
+    border-color:green; /* Change border color on focus */
+  }
+  

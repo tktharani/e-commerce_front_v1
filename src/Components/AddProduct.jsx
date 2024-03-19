@@ -1,142 +1,110 @@
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-export const AddProduct = () => {
-
-  //Set Image
-  let uploadimage = null;
+ export const AddProduct = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedImage, setSelectedImage] = useState();
-  // const [category, setCategory] = useState();
-  
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    price: '',
+    categoryname: '',
+  });
+  const [uploadedImage, setUploadedImage] = useState('');
 
-  const handleFile = () => {
-    console.log("hello world")
+  const handleFile = async () => {
     const formData = new FormData();
-    formData.append("file", selectedImage);
+    formData.append('file', selectedImage);
 
-    fetch("http://localhost:8080/file/upload", {
-      method: 'POST',
-      body: formData,
-      dataType: "jsonp"
-    })
-      .then(response => response.text())
-      .then(text => {
-        console.log(text)
-        uploadimage = text;
-        console.log("===Upload Image====="+uploadimage)
-        alert("upload image successfully")
-      })
-  }
-
-  //Add Products
-
-  const [formData, setData] = useState({
-    name: "",
-    description: "",
-    price: "",
-    categoryname : ""
-
-  })
-
+    try {
+      const response = await axios.post('http://localhost:8080/file/upload', formData);
+      setUploadedImage(response.data); // Store the uploaded image URL
+      alert('Image uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Failed to upload image. Please try again later.');
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setData({ ...formData, [name]: value })
-    console.log(name, value);
-  }
+    setFormData({ ...formData, [name]: value });
+  };
+
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    
+    event.preventDefault();
+
     // Validate form fields
     if (!formData.name || !formData.description || !formData.price || !selectedCategory || !selectedImage) {
-      alert("Please fill in all fields");
-      return; 
+      alert('Please fill in all fields');
+      return;
     }
-  
-    
+
     try {
       const response = await axios.post('http://localhost:8080/product/add', {
         name: formData.name,
         description: formData.description,
         price: formData.price,
         categoryname: selectedCategory,
-        image: uploadimage
+        image: uploadedImage,
       });
       console.log('Product added successfully:', response.data);
-      alert("Your added product sucessfully")
-      
+      alert('Your product has been added successfully');
+
       // Reset the form fields after successful submission
-      setData({
-        name: "",
-        description: "",
-        price: "",
-        categoryname: ""
+      setFormData({
+        name: '',
+        description: '',
+        price: '',
+        categoryname: '',
       });
       setSelectedImage(null);
+      setUploadedImage('');
     } catch (error) {
       console.error('Error adding product:', error);
+      alert('Failed to add product. Please try again later.');
     }
   };
 
-const handleSelectChange = (event) => {
-  console.log("Selected Category ====>"+selectedCategory)
-
-setSelectedCategory(event.target.value);
+  return (
+    <div className="container">
+      <h1>Add Product</h1>
+      <div className="row">
+        <div className="col-md-6">
+          {selectedImage && (
+            <div>
+              <img
+                alt="Uploaded Image"
+                width={250}
+                src={URL.createObjectURL(selectedImage)}
+              />
+              <br />
+              <button className="btn btn-danger me-2" onClick={() => setSelectedImage(null)}>Remove</button>
+              <button className="btn btn-primary" onClick={handleFile}>Upload</button>
+            </div>
+          )}
+          <input type="file" name="myImage" onChange={(e) => setSelectedImage(e.target.files[0])} />
+        </div>
+        <div className="col-md-6">
+          <p>Product Name: <input type="text" className="form-control" placeholder="Enter product name" name="name" value={formData.name} onChange={handleChange} /></p>
+          <p>Description: <input type="text" className="form-control" placeholder="Enter description" name="description" value={formData.description} onChange={handleChange} /></p>
+          <p>Price: <input type="number" className="form-control" placeholder="Enter price" name="price" value={formData.price} onChange={handleChange} /></p>
+          <p>Category Name:
+            <select className="form-select" id="category" value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+              <option value="">Select category...</option>
+              <option>fruits</option>
+              <option>Vegetables</option>
+              <option>Fresh fish</option>
+              <option>Fresh meat</option>
+              {/* Add dynamic options for categories */}
+            </select>
+          </p>
+          <button className="btn btn-success" onClick={handleSubmit}>Add</button>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-
-  return (
-    <div>
-      <div>
-
-        {selectedImage && (
-          <div>
-            <img
-              alt="not found"
-              width={"250px"}
-              src={URL.createObjectURL(selectedImage)}
-            />
-            <br />
-            <button onClick={() => setSelectedImage(null)}>Remove</button>
-            <button onClick={() => handleFile()}>Upload</button>
-          </div>
-        )}
-        <p>Product Name : <input type='text' placeholder='enter your productname' name='name' value={formData.name} onChange={handleChange} /></p>
-        <p>Description : <input type='text' placeholder='enter your description' name='description' value={formData.description} onChange={handleChange} /></p>
-        <p>Price : <input type='number' placeholder='enter your price' name='price' value={formData.price} onChange={handleChange} /></p>
-
-        <p>
-          Category Name:
-          
-          <select id="category" value={selectedCategory} onChange={handleSelectChange}>
-                <option value="">Select category...</option>
-                <option>fruits</option>
-                <option>Vegetables</option>
-                <option>Fresh fish</option>
-                <option>Fresh meat</option>
-                {categories.map(category => (
-                    <option key={category.id} value={category.categoryname}>
-                        {category.categoryname}
-                    </option>
-                ))}
-            </select>
-        </p>
-        <input
-          type="file"
-          name="myImage"
-          onChange={(event) => {
-            console.log(event.target.files[0]);
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
-      </div>
-      <button onClick={handleSubmit}>Add</button>
-    </div>
-  )
-}
-
-
+export default AddProduct;

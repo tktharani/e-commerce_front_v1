@@ -1,0 +1,58 @@
+.banner-container {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .banner-text {
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .banner-text h2 {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .banner-image {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .banner-image img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    transition: transform 0.3s ease;
+  }
+  
+  .banner-image:hover img {
+    transform: scale(1.1);
+  }
+  
+  /* Color Animation */
+  @keyframes colorAnimation {
+    0% {
+      background-color: #f8f9fa; /* Initial background color */
+    }
+    50% {
+      background-color: #6ab04c; /* Intermediate background color (green) */
+    }
+    100% {
+      background-color: #f8f9fa; /* Final background color */
+    }
+  }
+  
+  .color-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    animation: colorAnimation 5s ease infinite; /* Color animation */
+  }
+  

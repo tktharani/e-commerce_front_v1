@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { Navbar } from 'react-bootstrap';
+import NavBar from './NavBar';
 
 
 
@@ -28,9 +30,10 @@ const navigate=useNavigate();
                  alert("Enter valid details");
              }else {
                  console.log("Data",res.data)
-                 if(res.data.role=='admin'){
+                 if(res.data.role =='admin'){
                   //admin page
                   navigate("/admin")
+                  // console.log(res.data)
                  }else{
                   //user  page
                   navigate("/")
@@ -47,6 +50,8 @@ const navigate=useNavigate();
      }
 
      return (
+      <div>
+        <Navbar />
       <div className="container p-5">
         <h2>Login Form</h2>
         <form onSubmit={handleSubmit} className="login-form">
@@ -63,9 +68,10 @@ const navigate=useNavigate();
         </form>
         {Array.isArray(formData) && formData.map(formData => (
           <div className="card" key={formData.id}>
-            <h1>Welcome {formData.username}</h1>
+            <h2>Welcome {formData.username}</h2>
           </div>
         ))}
+      </div>
       </div>
     );
   }

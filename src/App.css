@@ -1,5 +1,5 @@
 .hero-section {
-  background-image: url('../public/images/hero-banner.png');
+  /* background-image: url('../public/images/hero-banner.png'); */
   background-size: cover;
   background-position: center;
   color: rgb(56, 8, 228);
@@ -20,6 +20,15 @@
   margin-bottom: 30px;
   color:blue
 }
+.carousel-image {
+  max-width: 60%; /* Reduce image width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.carousel-control-prev, .carousel-control-next {
+  z-index: 1; /* Ensure controls are above the carousel images */
+}
+
 
 .cta-button {
   padding: 15px 30px;

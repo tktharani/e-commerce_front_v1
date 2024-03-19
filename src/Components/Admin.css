@@ -1,0 +1,31 @@
+.admin-container {
+    padding: 20px;
+  }
+  
+  .logout-link {
+    text-decoration: none;
+    float: right;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-input {
+    width: 200px; /* Adjust the width as needed */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .add-product-btn {
+    margin-bottom: 20px;
+  }
+  
+  .actions-btns {
+    display: flex;
+    gap: 5px;
+  }
+  

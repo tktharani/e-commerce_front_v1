@@ -1,0 +1,15 @@
+.marquee-text {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: marqueeAnimation 15s linear infinite; /* Adjust animation duration as needed */
+  }
+  
+  @keyframes marqueeAnimation {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
