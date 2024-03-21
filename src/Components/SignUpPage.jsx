@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
 
 const SignUpPage = () => {
@@ -48,6 +49,7 @@ const SignUpPage = () => {
 
        return (
         <div>
+          <NavBar />
           <div className="container bg-secondary p-5">
             <h2 className='text-uppercase text-danger mb-4'>Register form</h2>
             <form onSubmit={handleSubmit} className="signup-form">

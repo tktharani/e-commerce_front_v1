@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
-import HeroSection from './HeroSection';
 import Footer from './Footer';
 import './List.css';
-import Banner from './Banner';
-
+import CartModal from './CartModal';
+import { Carousel } from 'react-bootstrap';
 
 const ProductList = () => {
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [errorMessage, setErrorMessage] = useState('');
+  const [cartItems, setCartItems] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [cartClicked, setCartClicked] = useState(false);
 
   useEffect(() => {
     fetchProducts();
@@ -49,25 +51,89 @@ const ProductList = () => {
         quantity: 1 
       });
       console.log('Product added to cart:', response.data);
-            navigate('/cart-summary', { state: { product } });
-  
+      setCartItems([...cartItems, product]);
+      setCartClicked(true); // Set cartClicked to true to trigger the cart modal
     } catch (error) {
       console.error('Error adding product to cart:', error);
       setErrorMessage('Error adding product to cart. Please try again later.');
     }
   };
 
+  const handleCartClick = () => {
+    setShowModal(true);
+    setCartClicked(false); // Reset cartClicked after showing the cart modal
+  };
+
   return (
     <div>
       <NavBar />
-      {/* <HeroSection /> */}
+      <Carousel className="custom-carousel" >
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="./images/Banner-8.jpg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            {/* <h3>First slide label</h3> */}
+            {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="./images/Banner-9.jpg"
+            alt="Second slide"
+          />
+          <Carousel.Caption>
+            {/* <h3>Second slide label</h3> */}
+            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="./images/Banner-10.jpg"
+            alt="Second slide"
+          />
+          <Carousel.Caption>
+            {/* <h3>Second slide label</h3> */}
+            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="./images/Banner-5.jpg"
+            alt="Second slide"
+          />
+          <Carousel.Caption>
+            {/* <h3>Second slide label</h3> */}
+            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="./images/Banner-7.jpg"
+            alt="Second slide"
+          />
+          <Carousel.Caption>
+            {/* <h3>Second slide label</h3> */}
+            {/* <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
+          </Carousel.Caption>
+        </Carousel.Item>
+        {/* Add more Carousel.Item components as needed */}
+      </Carousel>
       <div className="container">
-        
-        <h3 className="marquee-text">Discover a wide range of products for all your needs</h3>
-        {/* <img src={process.env.PUBLIC_URL + '/images/hero-banner.png'} alt="Hero Banner" /> */}
-        {/* <Banner /> */}
-
-        <h1 className=""> Products</h1>
+        <h1 className="">Products</h1>
+        <div className='d-flex justify-content-end align-items-center mb-3' onClick={handleCartClick}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill={cartClicked ? 'green' : 'currentColor'} className="bi bi-cart-check" viewBox="0 0 16 16">
+            <path d="M11.354 6.354a.5.5 0 0 0-.708-.708L8 8.293 6.854 7.146a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"/>
+            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zm3.915 10L3.102 4h10.796l-1.313 7zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+            <text x="16" y="8" fontSize="10" fill="red">{cartItems.length > 0 ? cartItems.length : ''}</text>
+          </svg>
+        </div>
         {errorMessage && <p className="text-danger">{errorMessage}</p>}
         <div className="dropdown mb-4">
           <select className="form-select-lg" value={selectedCategory} onChange={(e) => filterProductsByCategory(e.target.value)}>
@@ -79,13 +145,12 @@ const ProductList = () => {
         <div className="row">
           {filteredProducts.map((product, index) => (
             <div key={index} className="col-lg-4 col-md-6 mb-4">
-              <div className="card">
-                <img src={`http://localhost:8080/uploads/${product.image}`} className="card-img-top" alt={product.name} 
-                />
+              <div className="card product-card">
+                <img src={`http://localhost:8080/uploads/${product.image}`} className="card-img-top product-image" alt={product.name} />
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.description}</p>
-                  <p className="card-text">Price: ${product.price}</p>
+                  <p className="card-text"> Rs.{product.price}</p>
                   <p className="card-text">Category: {product.categoryname}</p>
                   <button className="btn btn-success" onClick={() => addToCart(product)}>Add to cart</button>
                 </div>
@@ -95,6 +160,7 @@ const ProductList = () => {
         </div>
       </div>
       <Footer />
+      {showModal && <CartModal cartItems={cartItems} closeModal={() => setShowModal(false)} />}
     </div>
   );
 };

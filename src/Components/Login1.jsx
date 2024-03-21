@@ -8,12 +8,22 @@ import NavBar from './NavBar';
 
 
 
+
+
 const Login1 = () => {
 const navigate=useNavigate();
   const [formData , setFormData] = useState({
     username : "",
     password : ""
    })
+   
+
+  const handleLogin = () => {
+    // Perform login logic
+    // If login is successful, redirect to the checkout page
+    navigate('/checkout');
+  };
+
  
     const handleChange =(event) =>{
         const {name,value}=event.target; 
@@ -51,7 +61,7 @@ const navigate=useNavigate();
 
      return (
       <div>
-        <Navbar />
+        <NavBar />
       <div className="container p-5">
         <h2>Login Form</h2>
         <form onSubmit={handleSubmit} className="login-form">
@@ -63,7 +73,7 @@ const navigate=useNavigate();
             <label htmlFor="password" className="text-white">Password</label>
             <input type="password" name="password" id="password" className="form-control" value={formData.password} onChange={handleChange} />
           </div>
-          <button type="submit" className="btn btn-success">Login</button>
+          <button type="submit" className="btn btn-success" onClick={handleLogin}>Login</button>
           <Link to="/signup" className="ml-3 text-white">Create New Account</Link>
         </form>
         {Array.isArray(formData) && formData.map(formData => (
