@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Nav, Modal, Button } from 'react-bootstrap'; // Import Modal and Button from react-bootstrap
+import { Nav, Modal, Button } from 'react-bootstrap'; 
 import AllProduct from './AllProduct.jsx';
 import User from './User.jsx';
 import AddProductForm from './AddProduct';
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('active'); // Default active tab is 'active'
+  const [activeTab, setActiveTab] = useState('active'); 
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
