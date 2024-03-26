@@ -43,6 +43,13 @@ const SignUpPage = () => {
            }) .then((response)=>{
              console.log("Data received" +response);
              alert("Your are successfully Registered");
+             setFormData({
+              username: "",
+              password: "",
+              email: "",
+              address: "",
+              role: "",
+          });
            })
            }
        }

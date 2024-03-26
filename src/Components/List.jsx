@@ -52,17 +52,20 @@ const ProductList = () => {
       });
       console.log('Product added to cart:', response.data);
       setCartItems([...cartItems, product]);
-      setCartClicked(true); // Set cartClicked to true to trigger the cart modal
-    } catch (error) {
+      setCartClicked(true); 
+        } catch (error) {
       console.error('Error adding product to cart:', error);
       setErrorMessage('Error adding product to cart. Please try again later.');
     }
   };
+  
+  
 
   const handleCartClick = () => {
     setShowModal(true);
-    setCartClicked(false); // Reset cartClicked after showing the cart modal
+    setCartClicked(false); 
   };
+  
 
   return (
     <div>

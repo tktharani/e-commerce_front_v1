@@ -3,24 +3,22 @@ import { useNavigate } from 'react-router-dom';
 
 const CartModal = ({ cartItems, closeModal }) => {
   const [cart, setCart] = useState(cartItems);
-  const navigate = useNavigate(); // Correctly use useNavigate hook
+  const navigate = useNavigate(); 
 
-  // Function to calculate total price for a single item
-  const calculateTotalPrice = (item) => {
-    return item.price * (item.quantity || 1); // Use default quantity of 1 if quantity is not defined
+    const calculateTotalPrice = (item) => {
+    return item.price * (item.quantity || 1); 
   };
 
-  // Function to calculate total price for all items in the cart
+  
   const calculateCartTotal = () => {
     return cart.reduce((total, item) => total + calculateTotalPrice(item), 0);
   };
 
-  // Function to handle quantity increase
-  const increaseQuantity = (item) => {
+   const increaseQuantity = (item) => {
     const updatedCart = cart.map((cartItem) => {
       if (cartItem.id === item.id) {
-        return { ...cartItem, quantity: (cartItem.quantity || 0) + 1 }; // Use default quantity of 0 if quantity is not defined
-      }
+        return { ...cartItem, quantity: (cartItem.quantity || 0) + 1 }; 
+       }
       return cartItem;
     });
     setCart(updatedCart);
@@ -29,8 +27,8 @@ const CartModal = ({ cartItems, closeModal }) => {
   // Function to handle quantity decrease
   const decreaseQuantity = (item) => {
     const updatedCart = cart.map((cartItem) => {
-      if (cartItem.id === item.id && (cartItem.quantity || 0) > 1) { // Ensure quantity is greater than 1 before decreasing
-        return { ...cartItem, quantity: (cartItem.quantity || 0) - 1 }; // Use default quantity of 0 if quantity is not defined
+      if (cartItem.id === item.id && (cartItem.quantity || 0) > 1) { 
+        return { ...cartItem, quantity: (cartItem.quantity || 0) - 1 };
       }
       return cartItem;
     });
@@ -40,7 +38,7 @@ const CartModal = ({ cartItems, closeModal }) => {
   // Function to handle proceed to buy
   const proceedToBuy = () => {
     // Redirect to the login page
-    navigate('/login'); // Use navigate instead of history.push
+    navigate('/login'); 
   };
 
   return (

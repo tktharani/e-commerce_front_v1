@@ -98,8 +98,7 @@ export default function EditProductForm() {
             <option value="">Select category...</option>
             <option>fruits</option>
             <option>Vegetables</option>
-            <option>Fresh fish</option>
-            <option>Fresh meat</option>
+            
             {categories.map(category => (
               <option key={category.id} value={category.categoryname}>{category.categoryname}</option>
             ))}
