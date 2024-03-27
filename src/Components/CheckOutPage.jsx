@@ -10,6 +10,7 @@ const CheckoutPage = ({ cartItems }) => {
     pinCode: '',
     country: '',
     paymentMethod: 'CreditCard', 
+    paymentMethod: 'Gpay', 
   });
 
   const navigate = useNavigate(); 
@@ -59,6 +60,10 @@ const CheckoutPage = ({ cartItems }) => {
           <div className="form-check">
             <input className="form-check-input" type="radio" name="paymentMethod" value="CreditCard" checked={shippingInfo.paymentMethod === 'CreditCard'} onChange={handlePaymentMethodChange} />
             <label className="form-check-label">Credit Card</label>
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="paymentMethod" value="Gpay" checked={shippingInfo.paymentMethod === 'Gpay'} onChange={handlePaymentMethodChange} />
+            <label className="form-check-label">Gpay</label>
           </div>
           
         </div>

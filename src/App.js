@@ -18,7 +18,7 @@ import HeroSection from './Components/HeroSection.jsx';
 import Footer from './Components/Footer.jsx';
 import User from './Components/User.jsx';
 import AllProduct from './Components/AllProduct.jsx';
-import Cart from './Components/Cart.jsx';
+
 import CartSummaryPage from './Components/CartSummaryPage.jsx';
 import CheckoutPage from './Components/CheckOutPage.jsx';
 

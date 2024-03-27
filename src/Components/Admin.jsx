@@ -63,7 +63,7 @@ const Admin = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowAddModal(false)}>Close</Button>
-          {/* Add functionality to submit the form and update product list */}
+          
         </Modal.Footer>
       </Modal>
     </div>

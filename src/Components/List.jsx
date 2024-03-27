@@ -6,6 +6,7 @@ import Footer from './Footer';
 import './List.css';
 import CartModal from './CartModal';
 import { Carousel } from 'react-bootstrap';
+import HeroSection from './HeroSection';
 
 const ProductList = () => {
   const navigate = useNavigate();
@@ -59,8 +60,6 @@ const ProductList = () => {
     }
   };
   
-  
-
   const handleCartClick = () => {
     setShowModal(true);
     setCartClicked(false); 

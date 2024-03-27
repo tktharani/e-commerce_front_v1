@@ -80,6 +80,10 @@ export default function EditProductForm() {
   return (
     <div className="container mt-4">
       <form onSubmit={(e) => onSubmit(e)}>
+      <div className="mb-3">
+          <label htmlFor="productId" className="form-label">Product ID:</label>
+          <input type="text" id="productID" className="form-control" placeholder="Enter product name" name="id" value={id} onChange={(e) => onInputChange(e)} />
+        </div>
         <div className="mb-3">
           <label htmlFor="productName" className="form-label">Product Name:</label>
           <input type="text" id="productName" className="form-control" placeholder="Enter product name" name="name" value={name} onChange={(e) => onInputChange(e)} />
@@ -120,4 +124,4 @@ export default function EditProductForm() {
       </form>
     </div>
   );
-          }
+     }

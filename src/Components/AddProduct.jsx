@@ -58,6 +58,7 @@ import axios from 'axios';
         description: '',
         price: '',
         categoryname: '',
+       
       });
       setSelectedImage(null);
       setUploadedImage('');
