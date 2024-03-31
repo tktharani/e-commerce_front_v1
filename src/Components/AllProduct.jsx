@@ -37,9 +37,11 @@ export const AllProduct = () => {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+  
 
   return (
     <div>
+      
       <div className='search-bar d-flex justify-content-center'>
         <input
           type="text"
@@ -63,27 +65,46 @@ export const AllProduct = () => {
           </tr>
         </thead>
         <tbody>
-          {products
-            .filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
-            .map(product => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>{product.categoryname}</td>
-                <td>{product.image}</td>
-                <td className=''>
-                  <Link className='btn btn-outline-success ' to={`/edit/${product.id}`}>Edit</Link>
-                  </td>
-                  <td>
-                  <button className='btn btn-outline-danger' onClick={() => {
-                    setProductIdToDelete(product.id);
-                    setShowDeleteModal(true);
-                  }}>Delete</button>
-                </td>
-              </tr>
-            ))}
+        {products
+  .filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()))
+  .map(product => {
+    console.log('Image Path:', product.image); 
+      return (
+      <tr key={product.id}>
+        <td>{product.id}</td>
+        <td>{product.name}</td>
+        <td>{product.description}</td>
+        <td>{product.price}</td>
+        <td>{product.categoryname}</td>
+        <td>
+                {product.image && (
+                  <img
+                    src={`http://localhost:8080/file/upload/${product.image}`}
+                    alt={product.name}
+                    style={{ width: '70px', height: '60px' }}
+                    onError={(e) => console.error('Error loading image:', e.message)} 
+                  />
+                )}
+              </td>
+
+        <td className=''>
+          <Link className='btn btn-outline-success ' to={`/edit/${product.id}`}>Edit</Link>
+        </td>
+        <td>
+          <button
+            className='btn btn-outline-danger'
+            onClick={() => {
+              setProductIdToDelete(product.id);
+              setShowDeleteModal(true);
+            }}
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+
         </tbody>
       </table>
 

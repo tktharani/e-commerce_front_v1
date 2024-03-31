@@ -14,10 +14,12 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedWeight, setSelectedWeight] = useState('lkg');
   const [errorMessage, setErrorMessage] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [cartClicked, setCartClicked] = useState(false);
+  const [productWeights, setProductWeights] = useState({});
 
   useEffect(() => {
     fetchProducts();
@@ -64,6 +66,23 @@ const ProductList = () => {
     setShowModal(true);
     setCartClicked(false); 
   };
+  const getPriceByWeight = (product) => {
+    const selectedWeight = productWeights[product.id] || 'lkg'; // Get selected weight for the product
+    switch (selectedWeight) {
+      case 'lkg':
+        return product.price; 
+      case '500g':
+        return product.price / 2; 
+      case '250g':
+        return product.price / 4; 
+      default:
+        return product.price; 
+    }
+  };
+  const handleWeightChange = (productId, weight) => {
+    setProductWeights({ ...productWeights, [productId]: weight }); // Update selected weight for the product
+  };
+
   
 
   return (
@@ -142,8 +161,11 @@ const ProductList = () => {
             <option value="All">All</option>
             <option value="fruits">Fruits</option>
             <option value="Vegetables">Vegetables</option>
+            <option value="meat">meat</option>
+            <option value="fish">fish</option>
           </select>
         </div>
+        
         <div className="row">
           {filteredProducts.map((product, index) => (
             <div key={index} className="col-lg-4 col-md-6 mb-4">
@@ -152,7 +174,19 @@ const ProductList = () => {
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.description}</p>
-                  <p className="card-text"> Rs.{product.price}</p>
+                  <div className="dropdown mb-2">
+                    <select
+                      className="form-select"
+                      value={productWeights[product.id] || 'lkg'} // Use selected weight for the product
+                      onChange={(e) => handleWeightChange(product.id, e.target.value)}
+                    >
+                      <option value="lkg">1 kg</option>
+                      <option value="500g">500 g</option>
+                      <option value="250g">250 g</option>
+                    </select>
+                  </div>
+                  <p className="card-text"> Rs.{getPriceByWeight(product)}</p> 
+       
                   <p className="card-text">Category: {product.categoryname}</p>
                   <button className="btn btn-success" onClick={() => addToCart(product)}>Add to cart</button>
                 </div>

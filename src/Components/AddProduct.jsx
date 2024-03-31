@@ -96,8 +96,8 @@ import axios from 'axios';
               <option value="">Select category...</option>
               <option>fruits</option>
               <option>Vegetables</option>
-              <option>Fresh fish</option>
-              <option>Fresh meat</option>
+              <option>fish</option>
+              <option>meat</option>
               {/* Add dynamic options for categories */}
             </select>
           </p>
